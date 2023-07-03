@@ -1,0 +1,33 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-1 g-4">
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/longterm1.jpg' %}  class="card-img-top" alt="...">
+        <div class="card-body">
+          <h2 class="card-title">LOW MONTHLY & LONG-TERM CAR RENTAL RATES</h2>
+          <p class="card-text">Flexible rentals for a month or longer.</p>
+          <p>
+            Designed to give you all the benefits of a premium car for an extended period of time with great rates and no long-term commitment. 
+          </p>
+          <p>
+
+          </p>              
+            Great Rates:  the longer you rent, the more you save <br>
+            No long term commitment:  rent up to 11 months at a time <br>          
+        
+            Swap Vehicles:  If you need to change your car for any reason, contact the rental location from where you picked up your car, to schedule a vehicle swap.</p>
+            <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>    
+</div>
+{% include 'sitemain/footer.html' %}
+
+
+{% endblock content %}
+
+

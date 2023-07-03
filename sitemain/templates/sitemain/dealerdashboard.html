@@ -1,0 +1,91 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class='container mt-3'>
+    <h2 class='text-center alert alert-danger'><i class="fas fa-clipboard-list"></i> Dealer's Dashboard</h2>
+</div>
+<div class="container text-center">   
+    <div class="row justify-content-evenly">
+      <div class="col-5">
+        <a href="{% url 'dealerdashboard' %}" class="text-decoration-none">
+            <h5 class='text-center alert alert-danger'><i class="fas fa-car"></i> Manage Vehicles</h2></a>       
+      </div>
+      <div class="col-5">        
+        <a href="{% url 'dealerreservation' %}" class="text-decoration-none">
+            <h5 class='text-center alert alert-danger'><i class="fas fa-calendar-check"></i> Manage Reservations</h2></a>   
+      </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-3">
+        <h3 class='text-center alert alert-info'>Add New Vehicle</h3>
+        <form action="" method="POST">
+          {% csrf_token %} 
+          <div>         
+              {{fm.as_p}}
+          </div>       
+          <div class="d-grid gap-2">
+            <input class="btn btn-success" type="submit" value="Add Vehicle">
+          </div>     
+        </form>
+    </div>
+    <div class="col-sm-9">
+        <h3 class='text-center alert alert-info'>Show Vehicle Information</h3>
+        {% if vehicle %}        
+            <table class="table table-hover">
+                <thead>  
+                    <tr>                        
+                        <th scope="col">Dealer</th>
+                        <th scope="col">Model</th>                       
+                        <th scope="col">Type</th>                       
+                        <th scope="col">Rate</th>
+                        <th scope="col">License#</th>                  
+                        <th scope="col">@ Location</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in vehicle %}
+                        <tr>                            
+                            <th scope="row">{{record.customer}}</th>    
+                            <td>{{record.model}}</td>                 
+                            <td>{{record.type}}</td>                    
+                            <td>${{record.rate}}.00</td>
+                            <td>{{record.licensenm}}</td>
+                            <td>{{record.available_at}}</td>            
+                            <td>
+                                <a href=" {% url 'editvehicle' record.id %} " class='btn btn-warning btn-sm'>Edit</a>
+                                <form action="{% url 'deletevehicle' record.id %}" method="POST" class='d-inline'> 
+                                    {% csrf_token %}
+                                    <input type="submit" class='btn btn-danger btn-sm' value="Delete">
+                                </form>                                 
+                            </td>
+                        </tr>
+                    {% endfor %}                              
+                </tbody>
+            </table>
+        {% else %}
+        <h4 class='text-center alert alert-warning'>No Records</h4>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+

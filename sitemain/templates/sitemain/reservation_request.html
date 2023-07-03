@@ -1,0 +1,41 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+
+{% block content %} 
+
+<div class="jumbotron jumbotron-fluid">
+  <h1 class="display-4 mb-2 text-center">Start Reservation</h1>                    
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-sm-5">
+    <form action="" method="post">
+      {% csrf_token %} 
+      <div>         
+          {{form.as_p}}
+      </div>       
+      <div class="d-grid gap-2">
+        <input class="btn btn-primary" type="submit" value="Search Available Vehicles">
+      </div>     
+    </form>
+  </div>
+</div>
+
+{% endblock content %}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+

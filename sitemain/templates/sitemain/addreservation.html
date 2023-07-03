@@ -1,0 +1,39 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+{% block content %} 
+
+<div class="row justify-content-center mt-4">
+    <div class="col-sm-5">
+        <div>
+            <h2>Selected Reservation Details</h2>
+            <p><strong>Customer:</strong> {{ customer }}</p>
+            <p><strong>Vehicle:</strong> {{ vehicle }}</p>
+            <p><strong>Pickup Date:</strong> {{ pd }}</p>
+            <p><strong>Return Date:</strong> {{ rd }}</p>
+            <p><strong>Pickup Location:</strong> {{ pl }}</p>
+            <p><strong>Return Location:</strong> {{ rl }}</p>
+            <p><strong>Type:</strong> {{ ty }}</p>
+            <p><strong>Days Rented:</strong> {{ dr }} </p>
+            <p><strong>Order Total:</strong> ${{ ot }}</p>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-sm-5">
+        <form action="{% url 'addreservation' id pd rd pl rl ty %}" method="POST">
+            {% csrf_token %}            
+            <div style="display: none;">
+                {{fm.as_p}}
+            </div>
+            <div class="d-grid gap-2">                
+                <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-bag"></i> Add Reservation</button> 
+                <div class="d-grid gap-2 mb-2">
+                    <a href="javascript:history.go(-1)" class="btn btn-primary">Go Back</a>
+                </div>                            
+            </div>              
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

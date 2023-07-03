@@ -1,0 +1,51 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/toyota-corolla.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Economy -- $40/day</h5>
+          <p class="card-text">Our Economy cars give great milage. Book now and save few dollors!!</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/vw-jetta.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Standard -- $70/day</h5>
+          <p class="card-text">Our Standar size sedans offer ample room while giving economical milage.</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>    
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/jaguar-f-pace.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Premium SUV -- $150/day</h5>
+          <p class="card-text">Our Premium SUV offer ample space and luxary for your special vacation.</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>  
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/chevy-corvette.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">SIGNATURE SERIES -- $300/day</h5>
+          <p class="card-text">Our Signature Series fleet offer most luxarious rides for your special vacation.</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>    
+  </div>
+  {% include 'sitemain/footer.html' %}
+{% endblock content %}
+
+

@@ -1,0 +1,39 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="row justify-content-center">
+    <div class="col-sm-5">
+        <h3 class='alert alert-info'>Update Vehicle Information</h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div>
+            {{form.as_p}}
+            </div>
+            <div class="d-grid gap-2">
+            <input type="submit" class='btn btn-success' value="Update">
+            <a href=" {% url 'dealerdashboard' %} " class='btn btn-info'>Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+

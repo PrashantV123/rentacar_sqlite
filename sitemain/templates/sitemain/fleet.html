@@ -1,0 +1,95 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/ford-fiesta.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Economy -- Ford Fiesta</h5>
+          <p class="card-text">4 Door; 5 seats; A/C; Automatic; Fits 1 Large Bag and 1 Small Bag; 27-35 mpg;
+          Smoke Free, Radio, Bluetooth/SYNC, Back-up Camera</p>          
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/toyota-corolla.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Economy -- Toyota Corolla</h5>
+          <p class="card-text">4 Door; 5 seats; A/;C Automatic; 1 Large Bag 2 Small Bags; 29-35 mpg; Smoke Free, Anti-Lock Brakes, Bluetooth/SYNC, Back-up Camera</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/vw-jetta.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Standard -- VW Jetta</h5>
+          <p class="card-text">4 Door; 5 seats; A/C; Automatic; 1 Large Bag 2 Small Bags; 24-35 mpg; Radio, Bluetooth/SYNC, Back-up Camera</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/toyota-camry.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Standard -- Toyota Camry</h5>
+          <p class="card-text"> 4 Door; 5 seats; A/C; Automatic; 2 Large Bags 2 Small Bags; 22-30 mpg; Radio; Bluetooth/SYNC, Back-up Camera</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row mt-2 row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/jaguar-f-pace.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Premium SUV -- Jaguar F-Pace</h5>
+          <p class="card-text">4 Door; 5 seats; A/C; Automatic; 2 Large Bags 2 Small Bags; 20-26 mpg; Radio</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/land-rover.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Premium SUV -- Range Rover Velar</h5>
+          <p class="card-text">4 Door; 5 seats; Automatic; A/C; 3 Large Bags 1 Small Bag; 20-26 mpg; Radio</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/chevy-corvette.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">SIGNATURE SERIES -- Chevrolet Corvette Coupe</h5>
+          <p class="card-text">2 Door; 2 seats; A/C; Automatic; 2 Large Bags; 15-24 mpg; Smoke Free, Satellite Radio, Bluetooth, Backup Camera, Remote Start, Push Button Start (SmartKey), Navigation, Heated Seats, Power Locks, Power Steering, Power Windows, Anti-Lock Brakes</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/dodge-challenger.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">SIGNATURE SERIES -- Dodge Challenger</h5>
+          <p class="card-text">2 Door; 4 seats; A/C; Automatic; 2 Large Bags; 15-19 mpg; Smoke Free, Satellite Radio, Bluetooth, Backup Camera, Remote Start, Push Button Start (SmartKey), Navigation, Heated Seats, Power Locks, Power Steering, Power Windows, Anti-Lock Brakes</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'sitemain/footer.html' %}
+{% endblock content %}
+
+

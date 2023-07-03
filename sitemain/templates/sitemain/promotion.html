@@ -1,0 +1,53 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/dog2.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">PROMOCODE: SAVE25</h5>
+          <p class="card-text">Save $25 on your reservation for orders over $100. Offer applies to any cars booked on-line.</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/trip.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">PROMOCODE: FRIENDS10</h5>
+          <p class="card-text">Save 20% on your reservation for orders over $500. Offer applies to any cars booked on-line.</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src={% static 'sitemain/images/sunset.jpg' %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">ASK DEALER</h5>
+          <p class="card-text"> Save $200 on your order when you reserve for more than 30 days.</p>
+          <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+        <div class="card">
+          <img src={% static 'sitemain/images/dog1.jpg' %} class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">ASK DEALER FOR FREE UPGRADE</h5>
+            <p class="card-text">Book 5 trips; offer subject to availability and dealer's discretion. </p>
+            <a href="{% url 'reservation_request' %}" class="btn btn-primary">Make Reservation</a>
+          </div>
+        </div>
+      </div>
+</div>
+{% include 'sitemain/footer.html' %}
+
+
+{% endblock content %}
+
+

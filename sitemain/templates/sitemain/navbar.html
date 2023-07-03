@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #FBBC05">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><i class="fas fa-home"></i> Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
+          <li class="nav-item">
+            <a class="nav-link" href=" {% url 'fleet' %} "><i class="fas fa-warehouse"></i> Our Fleet</a>
+          </li>            
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-money-check-alt"></i> Pricing
+            </a>
+            <ul class="dropdown-menu" style="background-color: #FBBC05">
+              <li><a class="dropdown-item" href=" {% url 'pricing' %} ">Our Pricing Model</a></li>        
+              <li><a class="dropdown-item" href=" {% url 'promotion' %} ">Current Promotions</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-handshake" aria-hidden="true"></i> Services
+            </a>
+            <ul class="dropdown-menu" style="background-color: #FBBC05">
+              <li><a class="dropdown-item" href=" {% url 'protection' %} ">Protection & Coverages</a></li>
+              <li><a class="dropdown-item" href=" {% url 'longterm' %}">Long Term Car Rental</a></li>              
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'reservation_request' %}"><i class="fa fa-car" aria-hidden="true"></i> Make Reservation</a>
+          </li> 
+          {% if not request.user.is_authenticated %}         
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-user-plus" aria-hidden="true"></i> Signup
+            </a>
+            <ul class="dropdown-menu" style="background-color: #FBBC05">
+              <li><a class="nav-link" href=" {% url 'dealer_signup' %} ">Dealer Sign Up</a></li>
+              <li><a class="nav-link" href=" {% url 'customer_signup' %}">Customer Sign Up</a></li>                          
+            </ul>
+          </li>         
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-user" aria-hidden="true"></i> Sign In</a>
+          </li>
+          {%endif%}
+          {% if request.user.is_authenticated %}                      
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'showreservation' %}"><i class="fas fa-shopping-bag"></i> My Reservation</a>
+          </li>  
+          {% endif %}         
+        </ul>
+        {% if request.user.is_authenticated %}
+        <i class="fas fa-id-card"></i>&nbsp Welcome! {{request.user.username}}&nbsp          
+          <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Sign Out</a>        
+        {% endif %}
+      </div>
+    </div> 
+</nav>

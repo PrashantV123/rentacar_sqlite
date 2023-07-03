@@ -1,0 +1,207 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+
+{% block content %} 
+{% if vehicle %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Nice!</strong> For the options you selected; We found following cars; Now let us get you set up!!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-sm-5">
+    <table class="table table-success table-striped" align='center'>
+      <thead>
+        <tr>      
+          <th scope="col">Criteria</th>
+          <th scope="col">Selection</th>      
+        </tr>
+      </thead>
+      <tbody>
+        <tr>      
+          <td>Pickup Date</td>
+          <td>{{ pd }}</td>      
+        </tr>
+        <tr>      
+          <td>Return Date</td>
+          <td>{{ rd }}</td>      
+        </tr>
+        <tr>      
+          <td>Pickup Location</td>
+          <td>{{ pl }}</td>      
+        </tr>
+        <tr>      
+          <td>Return Location</td>
+          <td>{{ rl }}</td>      
+        </tr>
+        <tr>      
+          <td>Vehicle Type</td>
+          <td>{{ ty }}</td>      
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-grid gap-2 mb-2">
+      <a href="javascript:history.go(-1)" class="btn btn-primary">Go Back</a>
+  </div> 
+  </div>
+</div>
+
+<table class="table table-success table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Model</th>
+            <th scope="col">Type</th>
+            <th scope="col">Daily Rate</th>            
+            <th scope="col">@ Location</th>
+            <th scope="col"></th> 
+        </tr>
+    </thead>
+    <tbody>
+          {% for item in vehicle %}
+        <tr>
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.model}}</td>
+          <td>{{item.type}}</td>
+          <td>${{item.rate}}.00</td>
+          <td>{{item.available_at}}</td>
+          <td>
+            {% if request.user.is_authenticated %}
+            <a href=" {% url 'addreservation' item.id pd rd pl rl ty %} " class='btn btn-success btn-sm'>Select!</a> 
+            {% else %}
+            <a href=" {% url 'login' %} " class='btn btn-success btn-sm'>Sign In</a> 
+            {% endif %}
+          </td>          
+        </tr>        
+        {% endfor %}
+      </tbody>
+</table>
+
+{% elif alt_vehicle %}
+
+<! -- Show alternate vehicle -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>It looks like we did not find any cars that match your criteria.</strong> However, at the location you selected we found following cars available for booking!!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-sm-5">
+        <table class="table table-warning table-striped" align='center'>
+          <thead>
+            <tr>      
+              <th scope="col">Criteria</th>
+              <th scope="col">Selection</th>      
+            </tr>
+          </thead>
+          <tbody>
+            <tr>      
+              <td>Pickup Date</td>
+              <td>{{ pd }}</td>      
+            </tr>
+            <tr>      
+              <td>Return Date</td>
+              <td>{{ rd }}</td>      
+            </tr>
+            <tr>      
+              <td>Pickup Location</td>
+              <td>{{ pl }}</td>      
+            </tr>
+            <tr>      
+              <td>Return Location</td>
+              <td>{{ rl }}</td>      
+            </tr>
+            <tr>      
+              <td>Vehicle Type</td>
+              <td>{{ ty }}</td>      
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-grid gap-2">
+          <a href=" {% url 'reservation_request' %} " class='btn btn-primary btn-sm mb-2'>Startover Search</a>
+        </div>
+      </div>
+    </div>
+    
+    <table class="table table-warning table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Model</th>
+                <th scope="col">Type</th>
+                <th scope="col">Daily Rate</th>
+                <th scope="col">@ Location</th>
+                <th scope="col"></th> 
+            </tr>
+        </thead>
+        <tbody>
+              {% for item in alt_vehicle %}
+            <tr>
+              <th scope="row">{{item.id}}</th>
+              <td>{{item.model}}</td>
+              <td>{{item.type}}</td>
+              <td>${{item.rate}}.00</td>
+              <td>{{item.available_at}}</td>
+              <td>
+                {% if request.user.is_authenticated %}
+                <a href=" {% url 'addreservation' item.id pd rd pl rl ty %} " class='btn btn-success btn-sm'>Select!</a> 
+                {% else %}
+                <a href=" {% url 'login' %} " class='btn btn-success btn-sm'>Sign In</a> 
+                {% endif %} 
+              </td>          
+            </tr>        
+            {% endfor %}
+          </tbody>
+    </table>
+
+{% else %}
+<! -- Ask user to startover as search did not result in any available vehicle. -->
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>We did not find any cars that match your criteria.</strong> You may starover your search.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="row justify-content-center">
+<div class="col-sm-5">
+  <table class="table table-warning table-striped" align='center'>
+    <thead>
+      <tr>      
+        <th scope="col">Criteria</th>
+        <th scope="col">Selection</th>      
+      </tr>
+    </thead>
+    <tbody>
+      <tr>      
+        <td>Pickup Date</td>
+        <td>{{ pd }}</td>      
+      </tr>
+      <tr>      
+        <td>Return Date</td>
+        <td>{{ rd }}</td>      
+      </tr>
+      <tr>      
+        <td>Pickup Location</td>
+        <td>{{ pl }}</td>      
+      </tr>
+      <tr>      
+        <td>Return Location</td>
+        <td>{{ rl }}</td>      
+      </tr>
+      <tr>      
+        <td>Vehicle Type</td>
+        <td>{{ ty }}</td>      
+      </tr>      
+    </tbody>    
+  </table>
+  <div class="d-grid gap-2">
+    <a href=" {% url 'reservation_request' %} " class='btn btn-primary btn-sm'>Startover Search</a>
+  </div>
+</div>
+</div>
+
+{% endif %}
+
+  
+{% endblock content %}  

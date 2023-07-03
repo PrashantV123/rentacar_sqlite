@@ -1,0 +1,35 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+
+{% block content %} 
+
+<div class="alert alert-info" role="alert">
+    <i class="fas fa-exclamation-triangle"></i> Attention! To preserve availability of your reserved vehicle; We strongly advise our customers to only change "Pickup Date", "Return Date", and "Return Location" to an existing reservation; for any other changes to your existing reservation; We recommand canceling your existing reservation and startover. In future we will make updating reservation more customer friendly providing our customers with more options.
+</div>
+
+<div class="jumbotron jumbotron-fluid">
+    <h1 class="display-4 my-3 text-center">Update Reservation</h1>                    
+</div> 
+
+<div class="row justify-content-center">
+    <div class="col-sm-5">
+        <form action="" method="POST">
+        {% csrf_token %} 
+        <div>         
+            {{form.as_p}}          
+        </div> 
+        <div class="d-grid gap-2">
+            <input class="btn btn-success" type="submit" value="Update Reservation">
+        </div>            
+        </form>
+    </div>
+</div>
+
+<div class="alert alert-info mt-2" role="alert">
+    <i class="fas fa-exclamation-triangle"></i> Attention! To preserve availability of your reserved vehicle; We strongly advise our customers to only change "Pickup Date", "Return Date", and "Return Location" to an existing reservation; for any other changes to your existing reservation; We recommand canceling your existing reservation and startover. In future we will make updating reservation more customer friendly providing our customers with more options.
+</div>
+
+
+
+{% endblock content %}  

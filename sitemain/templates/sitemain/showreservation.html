@@ -1,0 +1,186 @@
+{% extends 'sitemain/base.html' %}
+{% load static %}
+
+
+{% block content %} 
+
+{% if reservation %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Your reservation has been booked with us!</strong> You may pay for your reservation at the dealership on pickup date or by clicking on Pay Button next to your reservation! Have a safe and wonderful trip!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+<table class="table mb-2 table-success table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Vehicle</th>
+            <th scope="col">Pickup Date</th>
+            <th scope="col">Return Date</th>
+            <th scope="col">Pickup Location</th>
+            <th scope="col">Return Location</th>
+            <th scope="col">Type</th>           
+            <th scope="col">Days Rented</th>
+            <th scope="col">Order Total</th> 
+            <th scope="col">Status</th> 
+            <th scope="col"></th> 
+        </tr>
+    </thead>
+    <tbody>
+          {% for item in reservation %}
+        <tr>
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.customer}}</td>
+          <td>{{item.vehicle}}</td>
+          <td>{{item.pickup_date}}</td>
+          <td>{{item.return_date}}</td>
+          <td>{{item.pickup_location}}</td>
+          <td>{{item.return_location}}</td>
+          <td>{{item.type}}</td>        
+          <td>{{item.days_rented}}</td>
+          <td>${{item.order_total}}.00</td>
+          <td>{{item.reservation_status}}</td>
+          <td class='text-center'>            
+            {% if item.reservation_status != 'Paid' %}            
+            <form action="{% url 'payreservation' item.id %}" method="POST" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success btn-sm">
+                <i class="fas fa-credit-card"></i> Pay
+              </button>
+            </form>
+            <form action=" {% url 'deletereservation' item.id %} " method="POST" class='d-inline'>
+              {% csrf_token %}
+              <input type="submit" class='btn btn-danger btn-sm' value="Cancle">            
+            </form>
+            {% endif %}             
+          </td>                    
+        </tr>        
+        {% endfor %}
+      </tbody>
+</table>
+
+<div class="row justify-content-center">
+  <div class="col-sm-3">
+    <div class="d-grid gap-2">
+      <a href=" {% url 'reservation_request' %} " class='btn btn-primary mb-2'><i class="fas fa-shopping-bag"></i> Add more reservations!</a>
+    </div>   
+  </div>   
+</div>   
+       
+
+{% else %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Oops! It looks like we hit a snag!</strong> We did not find any pending reservations for you; First book your reservation then come to this page to view your reservation!!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endif %}
+
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        <i class="fas fa-history"></i>&nbsp Closed Reservation History
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <table class="table table-success table-striped table-hover">
+          <thead>
+              <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Vehicle</th>
+                  <th scope="col">Pickup Date</th>
+                  <th scope="col">Return Date</th>
+                  <th scope="col">Pickup Location</th>
+                  <th scope="col">Return Location</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">License #</th>
+                  <th scope="col">Days Rented</th>
+                  <th scope="col">Order Total</th> 
+                  <th scope="col">Order Status</th> 
+                   
+              </tr>
+          </thead>
+          <tbody>
+                {% for item in closed_reservation %}
+              <tr>
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.customer}}</td>
+                <td>{{item.vehicle}}</td>
+                <td>{{item.pickup_date}}</td>
+                <td>{{item.return_date}}</td>
+                <td>{{item.pickup_location}}</td>
+                <td>{{item.return_location}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.vehicle.licensenm}}</td>
+                <td>{{item.days_rented}}</td>
+                <td>${{item.order_total}}.00</td>
+                <td>{{item.reservation_status}}</td>                    
+              </tr>        
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        <i class="fas fa-history"></i>&nbsp Canceled Reservation History
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <table class="table table-success table-striped table-hover">
+          <thead>
+              <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Vehicle</th>
+                  <th scope="col">Pickup Date</th>
+                  <th scope="col">Return Date</th>
+                  <th scope="col">Pickup Location</th>
+                  <th scope="col">Return Location</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">License #</th>
+                  <th scope="col">Days Rented</th>
+                  <th scope="col">Order Total</th> 
+                  <th scope="col">Order Status</th> 
+                   
+              </tr>
+          </thead>
+          <tbody>
+                {% for item in canceled_reservation %}
+              <tr>
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.customer}}</td>
+                <td>{{item.vehicle}}</td>
+                <td>{{item.pickup_date}}</td>
+                <td>{{item.return_date}}</td>
+                <td>{{item.pickup_location}}</td>
+                <td>{{item.return_location}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.vehicle.licensenm}}</td>
+                <td>{{item.days_rented}}</td>
+                <td>${{item.order_total}}.00</td>
+                <td>{{item.reservation_status}}</td>
+                                    
+              </tr>        
+              {% endfor %}
+            </tbody>
+      </table>
+      </div>
+    </div>
+  </div>  
+</div>
+
+  
+{% endblock content %}  
